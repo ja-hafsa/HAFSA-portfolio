@@ -1,0 +1,413 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Jahida Alam Hafsa — Portfolio</title>
+<meta name="description" content="Jahida Alam Hafsa — CSE undergraduate at United International University, aspiring software developer and UI/UX enthusiast.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500&family=Space+Grotesk:wght@400;500;700&display=swap" rel="stylesheet">
+<style>
+/* ============ COLOUR THEME — change these to re-colour the whole site ============ */
+:root{
+  --bg:#0c0a14;          /* page background */
+  --bg-2:#141024;        /* cards / alt sections */
+  --line:#2a2342;        /* borders */
+  --text:#ece9f6;        /* main text */
+  --muted:#9b94b8;       /* soft text */
+  --accent:#8b5cf6;      /* main accent (violet) */
+  --accent-2:#f59e0b;    /* second accent (amber) */
+  --radius:16px;
+}
+*{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth}
+body{background:var(--bg);color:var(--text);font-family:'Space Grotesk',system-ui,sans-serif;line-height:1.65;overflow-x:hidden}
+a{color:inherit;text-decoration:none}
+.wrap{max-width:1100px;margin:0 auto;padding:0 20px}
+section{padding:96px 0}
+.tag{font-family:'JetBrains Mono',monospace;font-size:.8rem;letter-spacing:.12em;color:var(--accent-2);text-transform:uppercase;margin-bottom:12px}
+h2{font-size:clamp(1.8rem,4vw,2.6rem);line-height:1.15;margin-bottom:36px}
+.grad{background:linear-gradient(90deg,var(--accent),var(--accent-2));-webkit-background-clip:text;background-clip:text;color:transparent}
+
+/* nav */
+header{position:fixed;inset:0 0 auto 0;z-index:50;background:rgba(12,10,20,.78);backdrop-filter:blur(12px);border-bottom:1px solid var(--line)}
+nav{display:flex;align-items:center;justify-content:space-between;height:64px}
+.logo{font-weight:700;letter-spacing:.04em}
+.logo span{color:var(--accent)}
+.links{display:flex;gap:24px;font-size:.92rem;color:var(--muted)}
+.links a:hover,.links a.on{color:var(--text)}
+.burger{display:none;background:none;border:1px solid var(--line);color:var(--text);border-radius:8px;padding:6px 10px;font-size:1.1rem;cursor:pointer}
+@media(max-width:860px){
+  .burger{display:block}
+  .links{position:absolute;top:64px;left:0;right:0;flex-direction:column;background:var(--bg-2);padding:18px 20px;gap:16px;border-bottom:1px solid var(--line);display:none}
+  .links.open{display:flex}
+}
+
+/* buttons */
+.btn{display:inline-block;padding:12px 24px;border-radius:999px;font-weight:500;border:1px solid var(--line);transition:.2s;cursor:pointer;font-family:inherit;font-size:.95rem;color:var(--text);background:transparent}
+.btn.primary{background:linear-gradient(90deg,var(--accent),#a78bfa);border-color:transparent;color:#fff}
+.btn:hover{transform:translateY(-2px);border-color:var(--accent)}
+
+/* hero */
+#home{min-height:100vh;display:flex;align-items:center;padding-top:110px;position:relative}
+#home::before{content:"";position:absolute;width:520px;height:520px;right:-120px;top:10%;background:radial-gradient(circle,rgba(139,92,246,.28),transparent 65%);pointer-events:none}
+.hero{display:grid;grid-template-columns:1.2fr .8fr;gap:48px;align-items:center}
+@media(max-width:860px){.hero{grid-template-columns:1fr}}
+.hero h1{font-size:clamp(2.3rem,6vw,3.9rem);line-height:1.08;margin:10px 0 18px}
+.hero p{color:var(--muted);max-width:560px;margin-bottom:14px}
+.cta{display:flex;gap:14px;flex-wrap:wrap;margin:14px 0 30px}
+.socials{display:flex;gap:10px;flex-wrap:wrap}
+.socials a{font-family:'JetBrains Mono',monospace;font-size:.78rem;border:1px solid var(--line);padding:6px 12px;border-radius:8px;color:var(--muted)}
+.socials a:hover{color:var(--text);border-color:var(--accent-2)}
+.term{background:var(--bg-2);border:1px solid var(--line);border-radius:var(--radius);overflow:hidden;font-family:'JetBrains Mono',monospace;font-size:.82rem;margin-top:26px;max-width:460px}
+.term .bar{padding:9px 14px;border-bottom:1px solid var(--line);color:var(--muted);display:flex;gap:6px;align-items:center}
+.term .dot{width:9px;height:9px;border-radius:50%;background:var(--line)}
+.term .dot:nth-child(1){background:#ef4444}.term .dot:nth-child(2){background:var(--accent-2)}.term .dot:nth-child(3){background:#22c55e}
+.term .body{padding:14px;color:var(--muted)}
+.term b{color:var(--accent-2);font-weight:500}
+
+/* photo slot */
+.photo{position:relative;aspect-ratio:4/5;border-radius:24px;border:1px solid var(--line);background:linear-gradient(160deg,var(--bg-2),#1d1536);overflow:hidden;display:grid;place-items:center}
+.photo::after{content:"";position:absolute;inset:0;border-radius:24px;box-shadow:inset 0 0 0 1px rgba(139,92,246,.35);pointer-events:none}
+.photo img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;z-index:1}
+.photo .ph{font-size:4rem;font-weight:700;color:var(--accent)}
+
+/* stats */
+.stats{display:grid;grid-template-columns:repeat(4,1fr);gap:16px;margin-bottom:70px}
+@media(max-width:700px){.stats{grid-template-columns:repeat(2,1fr)}}
+.stat{background:var(--bg-2);border:1px solid var(--line);border-radius:var(--radius);padding:22px;text-align:center}
+.stat strong{display:block;font-size:2.2rem;color:var(--accent-2)}
+.stat span{color:var(--muted);font-size:.85rem;line-height:1.35;display:block}
+
+/* about */
+.about{display:grid;grid-template-columns:.8fr 1.2fr;gap:48px;align-items:start}
+@media(max-width:860px){.about{grid-template-columns:1fr}}
+.about p{color:var(--muted);margin-bottom:16px}
+.facts{display:grid;grid-template-columns:1fr 1fr;gap:14px;margin-top:24px}
+.fact{background:var(--bg-2);border:1px solid var(--line);border-radius:12px;padding:14px}
+.fact.wide{grid-column:1/-1}
+.fact small{display:block;color:var(--accent-2);font-family:'JetBrains Mono',monospace;font-size:.7rem;text-transform:uppercase;letter-spacing:.1em}
+
+/* timeline */
+.tl{border-left:2px solid var(--line);padding-left:26px;display:grid;gap:28px}
+.tl-item{position:relative}
+.tl-item::before{content:"";position:absolute;left:-34px;top:8px;width:12px;height:12px;border-radius:50%;background:var(--accent);box-shadow:0 0 0 4px rgba(139,92,246,.2)}
+.tl-item time{font-family:'JetBrains Mono',monospace;font-size:.78rem;color:var(--accent-2)}
+.tl-item h3{margin:2px 0 4px}
+.tl-item p{color:var(--muted)}
+.tl-item ul{padding-left:18px;color:var(--muted);margin-top:6px;font-size:.95rem}
+
+/* cards */
+.grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(250px,1fr));gap:18px}
+.card{background:var(--bg-2);border:1px solid var(--line);border-radius:var(--radius);padding:24px;transition:.25s}
+.card:hover{transform:translateY(-5px);border-color:var(--accent)}
+.card h3{margin-bottom:8px}
+.chips{display:flex;flex-wrap:wrap;gap:8px;margin-top:14px}
+.card .chips{margin-top:4px}
+.chip{font-family:'JetBrains Mono',monospace;font-size:.72rem;padding:4px 10px;border-radius:999px;background:rgba(139,92,246,.14);color:#c4b5fd}
+
+/* projects */
+.proj{display:grid;grid-template-columns:1fr 1fr;gap:0;background:var(--bg-2);border:1px solid var(--line);border-radius:20px;overflow:hidden;margin-bottom:26px}
+.proj:nth-child(even) .proj-img{order:2}
+@media(max-width:800px){.proj{grid-template-columns:1fr}.proj:nth-child(even) .proj-img{order:0}}
+.proj-img{position:relative;min-height:260px;background:linear-gradient(135deg,#1d1536,#2b1a52);display:grid;place-items:center;color:var(--muted);font-family:'JetBrains Mono',monospace;font-size:.8rem}
+.proj-img img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover}
+.proj-body{padding:30px}
+.proj-body small{color:var(--accent-2);font-family:'JetBrains Mono',monospace;font-size:.75rem;text-transform:uppercase;letter-spacing:.1em}
+.proj-body h3{font-size:1.45rem;margin:6px 0 10px}
+.proj-body p{color:var(--muted);margin-bottom:12px}
+.proj-body ul{padding-left:18px;color:var(--muted);font-size:.92rem;margin-bottom:6px}
+.proj-body .team{color:var(--muted);font-size:.88rem;margin-top:8px}
+.proj-body .team b{color:var(--text);font-weight:500}
+.proj-body .btn{margin-top:16px;padding:9px 20px;font-size:.88rem}
+
+/* contact */
+.contact{display:grid;grid-template-columns:1.1fr .9fr;gap:36px}
+@media(max-width:860px){.contact{grid-template-columns:1fr}}
+form{display:grid;gap:14px}
+input,select,textarea{width:100%;background:var(--bg-2);border:1px solid var(--line);color:var(--text);padding:13px 14px;border-radius:12px;font:inherit}
+input:focus,select:focus,textarea:focus{outline:none;border-color:var(--accent)}
+textarea{min-height:130px;resize:vertical}
+.info p{color:var(--muted);margin-bottom:10px;overflow-wrap:anywhere}
+.info a{color:var(--text);border-bottom:1px dashed var(--accent-2)}
+.info .socials a{border-bottom:1px solid var(--line)}
+
+footer{border-top:1px solid var(--line);padding:30px 0;text-align:center;color:var(--muted);font-size:.85rem}
+
+/* reveal */
+.rv{opacity:0;transform:translateY(24px);transition:.7s}
+.rv.in{opacity:1;transform:none}
+@media(prefers-reduced-motion:reduce){.rv{opacity:1;transform:none;transition:none}html{scroll-behavior:auto}}
+</style>
+</head>
+<body>
+
+<header>
+  <div class="wrap">
+    <nav>
+      <a href="#home" class="logo">HAFSA<span>.</span></a>
+      <button class="burger" id="burger" aria-label="Menu">☰</button>
+      <div class="links" id="links">
+        <a href="#home">Home</a><a href="#about">About</a><a href="#education">Education</a><a href="#experience">Experience</a>
+        <a href="#skills">Skills</a><a href="#projects">Projects</a><a href="#contact">Contact</a>
+      </div>
+    </nav>
+  </div>
+</header>
+
+<!-- ================= HOME ================= -->
+<section id="home">
+  <div class="wrap hero">
+    <div>
+      <div class="tag">[ Bangladesh — CSE @ UIU ]</div>
+      <h1>Hi, I'm <span class="grad">Jahida Alam Hafsa</span></h1>
+      <div class="tag" style="color:var(--muted);text-transform:none;letter-spacing:.04em">CSE Undergraduate | Aspiring Software Developer | UI/UX Enthusiast</div>
+      <p style="margin-top:18px">A Computer Science and Engineering undergraduate passionate about building meaningful digital experiences.</p>
+      <p>I enjoy exploring software development, UI/UX design, emerging technologies, and research-driven solutions. I love turning ideas into creative and functional projects.</p>
+      <div class="cta">
+        <a class="btn primary" href="#projects">View Projects</a>
+        <!-- CV button: put your file at assets/resume.pdf -->
+        <a class="btn" href="assets/resume.pdf" download>Download CV ↓</a>
+      </div>
+      <div class="socials">
+        <a href="https://github.com/ja-hafsa" target="_blank" rel="noopener">GitHub</a>
+        <a href="https://www.linkedin.com/in/jahida-alam-hafsa14/" target="_blank" rel="noopener">LinkedIn</a>
+      </div>
+      <div class="term">
+        <div class="bar"><span class="dot"></span><span class="dot"></span><span class="dot"></span>&nbsp; terminal — hafsa@uiu</div>
+        <div class="body">
+          $ whoami → <b>jahida.alam.hafsa</b><br>
+          $ focus → <b>software dev · UI/UX · AI</b><br>
+          $ stack → <b>C · Java · React · PHP</b><br>
+          $ status → <b>open to opportunities</b>
+        </div>
+      </div>
+    </div>
+
+    <!-- HERO PHOTO: put your image at assets/photo.jpg (portrait, 4:5 ratio works best) -->
+    <div class="photo">
+      <div class="ph">JH</div>
+      <img src="assets/photo.jpg" alt="Jahida Alam Hafsa" onerror="this.remove()">
+    </div>
+  </div>
+</section>
+
+<!-- ================= ABOUT ================= -->
+<section id="about">
+  <div class="wrap">
+    <div class="stats rv">
+      <div class="stat"><strong>5+</strong><span>Projects &amp; Research Initiatives</span></div>
+      <div class="stat"><strong>3+</strong><span>Programming Languages</span></div>
+      <div class="stat"><strong>2+</strong><span>Professional Experience Areas</span></div>
+      <div class="stat"><strong>4+</strong><span>Technology &amp; Creative Domains</span></div>
+    </div>
+
+    <div class="about">
+      <!-- ABOUT PHOTO: assets/about.jpg (optional) -->
+      <div class="photo rv">
+        <div class="ph">JH</div>
+        <img src="assets/about.jpg" alt="About Jahida Alam Hafsa" onerror="this.remove()">
+      </div>
+      <div class="rv">
+        <div class="tag">01 // About</div>
+        <h2>CSE undergraduate at <span class="grad">United International University</span></h2>
+        <p>I'm a CSE undergraduate at United International University (UIU), interested in software development, technology, and creative problem-solving.</p>
+        <p>My interests span web development, UI/UX design, artificial intelligence, and human-computer interaction. I enjoy exploring how technology can make everyday experiences smarter, simpler, and more accessible.</p>
+        <p>Beyond coding, I have experience in marketing, content creation, and design. I also enjoy reading literature, exploring new ideas, and continuously learning about emerging technologies.</p>
+        <div class="facts">
+          <div class="fact"><small>Institution</small>United International University</div>
+          <div class="fact"><small>Department</small>Computer Science &amp; Engineering (CSE)</div>
+          <div class="fact wide"><small>Interests</small>Software Development · UI/UX · AI · Research · Literature · Reading &amp; Travelling</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ================= EDUCATION ================= -->
+<section id="education" style="background:var(--bg-2)">
+  <div class="wrap">
+    <div class="tag">02 // Education</div>
+    <h2 class="rv">Education <span class="grad">journey</span></h2>
+    <div class="tl">
+      <div class="tl-item rv"><time>2022 — Present</time><h3>Bachelor of Science in Computer Science &amp; Engineering</h3><p><strong>United International University (UIU)</strong> · Exploring computer science fundamentals, software engineering, database systems, networking, and emerging technologies.</p></div>
+      <div class="tl-item rv"><time>2021</time><h3>Higher Secondary Certificate (HSC)</h3><p><strong>Bisrestha Noor Mohammad Public College</strong></p></div>
+      <div class="tl-item rv"><time>2019</time><h3>Secondary School Certificate (SSC)</h3><p><strong>Bisrestha Munshi Abdur Rouf Public College</strong></p></div>
+    </div>
+  </div>
+</section>
+
+<!-- ================= EXPERIENCE ================= -->
+<section id="experience">
+  <div class="wrap">
+    <div class="tag">03 // Experience</div>
+    <h2 class="rv">Work &amp; <span class="grad">leadership</span></h2>
+    <div class="tl">
+      <div class="tl-item rv">
+        <time>Learns Academy</time>
+        <h3>Marketing Management &amp; Creative Content</h3>
+        <p>An educational IT company.</p>
+        <ul>
+          <li>Working on marketing management and creative content.</li>
+          <li>Participating in student interviews and communication activities.</li>
+        </ul>
+      </div>
+      <div class="tl-item rv">
+        <time>The Triple Zero — USA-based Cybersecurity Learning Institute</time>
+        <h3>Social Media &amp; Content Marketing</h3>
+        <ul>
+          <li>Worked on social media content and promotional campaigns.</li>
+          <li>Created awareness content for SOC Analysis and Cybersecurity Bootcamp programs.</li>
+          <li>Contributed to brand communication and audience engagement.</li>
+        </ul>
+      </div>
+      <div class="tl-item rv">
+        <time>Feb 2023 — Feb 2026</time>
+        <h3>Joint Secretary</h3>
+        <p><strong>UIU Literature and Writers Forum</strong></p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ================= SKILLS ================= -->
+<section id="skills" style="background:var(--bg-2)">
+  <div class="wrap">
+    <div class="tag">04 // Skills</div>
+    <h2 class="rv">Core skills &amp; <span class="grad">areas of focus</span></h2>
+    <div class="grid">
+      <div class="card rv"><h3>Programming &amp; Database</h3><div class="chips"><span class="chip">C</span><span class="chip">C++</span><span class="chip">Java</span><span class="chip">SQL</span><span class="chip">PHP</span><span class="chip">MySQL</span></div></div>
+      <div class="card rv"><h3>Web Development</h3><div class="chips"><span class="chip">HTML</span><span class="chip">CSS</span><span class="chip">JavaScript</span><span class="chip">React</span><span class="chip">Spring Boot</span><span class="chip">JSON &amp; Fetch API</span></div></div>
+      <div class="card rv"><h3>Design &amp; Creative Tools</h3><div class="chips"><span class="chip">Figma</span><span class="chip">UI/UX Design</span><span class="chip">Canva</span><span class="chip">Content Design</span><span class="chip">Social Media Management</span></div></div>
+      <div class="card rv"><h3>Tools, Research &amp; Technologies</h3><div class="chips"><span class="chip">Git &amp; GitHub</span><span class="chip">XAMPP</span><span class="chip">Cisco Packet Tracer</span></div></div>
+    </div>
+  </div>
+</section>
+
+<!-- ================= PROJECTS ================= -->
+<section id="projects">
+  <div class="wrap">
+    <div class="tag">05 // Projects</div>
+    <h2 class="rv">Featured <span class="grad">projects</span></h2>
+
+    <!-- PROJECT 1: image at assets/project1.jpg -->
+    <article class="proj rv">
+      <div class="proj-img"><span>assets/project1.jpg</span><img src="assets/project1.jpg" alt="Relify project" onerror="this.remove()"></div>
+      <div class="proj-body">
+        <small>Database Management System</small>
+        <h3>Relify — Relief Management System</h3>
+        <p>A web-based platform designed to manage relief-related information and support organized relief distribution.</p>
+        <ul><li>Relief information management</li><li>Database-driven data storage</li><li>Organized management of relief records</li></ul>
+        <div class="chips"><span class="chip">PHP</span><span class="chip">MySQL</span><span class="chip">XAMPP</span></div>
+        <!-- GitHub: when ready, uncomment and paste your repo link
+        <a class="btn" href="PASTE-REPO-LINK" target="_blank" rel="noopener">View on GitHub →</a> -->
+      </div>
+    </article>
+
+    <!-- PROJECT 2: image at assets/project2.jpg -->
+    <article class="proj rv">
+      <div class="proj-img"><span>assets/project2.jpg</span><img src="assets/project2.jpg" alt="Crime Investigation Game" onerror="this.remove()"></div>
+      <div class="proj-body">
+        <small>Object-Oriented Application Development</small>
+        <h3>Crime Investigation Game</h3>
+        <p>An interactive crime investigation game designed to provide an engaging investigative experience through software.</p>
+        <ul><li>Interactive investigation experience</li><li>Crime-related information management</li><li>Structured application architecture</li></ul>
+        <div class="chips"><span class="chip">React</span><span class="chip">Spring Boot</span><span class="chip">MySQL</span></div>
+        <p class="team">Team: <b>Bonolota</b></p>
+        <!-- GitHub: when ready, uncomment and paste your repo link
+        <a class="btn" href="PASTE-REPO-LINK" target="_blank" rel="noopener">View on GitHub →</a> -->
+      </div>
+    </article>
+
+    <!-- PROJECT 3: image at assets/project3.jpg -->
+    <article class="proj rv">
+      <div class="proj-img"><span>assets/project3.jpg</span><img src="assets/project3.jpg" alt="Women's Safety &amp; Empowerment Platform" onerror="this.remove()"></div>
+      <div class="proj-body">
+        <small>Web &amp; Social Impact Platform · Proposed</small>
+        <h3>Women's Safety &amp; Empowerment Platform</h3>
+        <p>A proposed digital platform combining women's safety, healthcare, education, and empowerment services for women in Bangladesh.</p>
+        <ul><li>SOS and Safe Route</li><li>Women's Health Hub</li><li>Evidence Vault and case tracking</li></ul>
+        <!-- Tech stack: add chips here once final, e.g. <div class="chips"><span class="chip">React</span></div> -->
+        <!-- GitHub: when ready, uncomment and paste your repo link
+        <a class="btn" href="PASTE-REPO-LINK" target="_blank" rel="noopener">View on GitHub →</a> -->
+      </div>
+    </article>
+
+    <!-- PROJECT 4: image at assets/project4.jpg -->
+    <article class="proj rv">
+      <div class="proj-img"><span>assets/project4.jpg</span><img src="assets/project4.jpg" alt="Gesture-Controlled Smart Car" onerror="this.remove()"></div>
+      <div class="proj-body">
+        <small>Embedded Systems &amp; IoT</small>
+        <h3>Gesture-Controlled Smart Car</h3>
+        <p>An Arduino-based smart car controlled through hand gestures using sensor-based interaction.</p>
+        <ul><li>Hand gesture-based movement</li><li>Obstacle detection and avoidance</li><li>Path memory and lock functionality</li></ul>
+        <div class="chips"><span class="chip">Arduino</span><span class="chip">MPU-6050</span><span class="chip">HC-05</span><span class="chip">Flex Sensor</span><span class="chip">L298N</span><span class="chip">Ultrasonic Sensor</span></div>
+        <!-- GitHub: when ready, uncomment and paste your repo link
+        <a class="btn" href="PASTE-REPO-LINK" target="_blank" rel="noopener">View on GitHub →</a> -->
+      </div>
+    </article>
+  </div>
+</section>
+
+<!-- ================= CONTACT ================= -->
+<section id="contact" style="background:var(--bg-2)">
+  <div class="wrap">
+    <div class="tag">06 // Contact</div>
+    <h2 class="rv">Let's <span class="grad">connect</span></h2>
+    <div class="contact">
+      <form id="form" class="rv">
+        <input id="n" placeholder="Your name" required>
+        <input id="e" type="email" placeholder="Your email" required>
+        <select id="t">
+          <option>General</option><option>Collaboration</option><option>Project / Research</option><option>Design / UI-UX</option><option>Job / Internship</option>
+        </select>
+        <textarea id="m" placeholder="Message" required></textarea>
+        <button class="btn primary" type="submit">Send via Email →</button>
+      </form>
+      <div class="info rv">
+        <p>Email: <a href="mailto:jalam223462@bscse.uiu.ac.bd">jalam223462@bscse.uiu.ac.bd</a></p>
+        <p>Phone: <a href="tel:+8801879792973">+880 1879-792973</a></p>
+        <p>Location: Bangladesh</p>
+        <div class="socials" style="margin-top:20px">
+          <a href="https://github.com/ja-hafsa" target="_blank" rel="noopener">GitHub</a>
+          <a href="https://www.linkedin.com/in/jahida-alam-hafsa14/" target="_blank" rel="noopener">LinkedIn</a>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<footer>© <span id="y"></span> Jahida Alam Hafsa — All rights reserved</footer>
+
+<script>
+document.getElementById('y').textContent=new Date().getFullYear();
+const links=document.getElementById('links');
+document.getElementById('burger').onclick=()=>links.classList.toggle('open');
+links.querySelectorAll('a').forEach(a=>a.onclick=()=>links.classList.remove('open'));
+
+// scroll reveal
+const io=new IntersectionObserver(es=>es.forEach(e=>{if(e.isIntersecting){e.target.classList.add('in');io.unobserve(e.target)}}),{threshold:.12});
+document.querySelectorAll('.rv').forEach(el=>io.observe(el));
+
+// active nav link
+const secs=[...document.querySelectorAll('section[id]')];
+addEventListener('scroll',()=>{
+  const y=scrollY+120;
+  secs.forEach(s=>{
+    const a=links.querySelector('a[href="#'+s.id+'"]');
+    if(a)a.classList.toggle('on',y>=s.offsetTop&&y<s.offsetTop+s.offsetHeight);
+  });
+},{passive:true});
+
+// contact form -> opens the visitor's mail app
+document.getElementById('form').addEventListener('submit',ev=>{
+  ev.preventDefault();
+  const to='jalam223462@bscse.uiu.ac.bd';
+  const sub=encodeURIComponent(document.getElementById('t').value+' — '+document.getElementById('n').value);
+  const body=encodeURIComponent(document.getElementById('m').value+'\n\nFrom: '+document.getElementById('e').value);
+  location.href='mailto:'+to+'?subject='+sub+'&body='+body;
+});
+</script>
+</body>
+</html>
